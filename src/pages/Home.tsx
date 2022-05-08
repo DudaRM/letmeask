@@ -10,6 +10,7 @@ import { useAuth } from '../hooks/useAuth';
 import '../styles/auth.scss';
 import { FormEvent, useState } from 'react';
 import { database } from '../services/firebase';
+import toast from 'react-hot-toast';
 
 export function Home(){
     const navigate = useNavigate();
@@ -32,7 +33,8 @@ export function Home(){
             }
             const roomRef = await database.ref(`rooms/${roomCode}`).get();
             if (!roomRef.exists()){
-                alert('Rooms does not exists.');
+                //alert('Rooms does not exists.');
+                toast.error('Rooms does not exists.');
                 return;
             }
             navigate(`/rooms/${roomCode}`);
