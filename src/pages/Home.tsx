@@ -40,8 +40,6 @@ export function Home(){
             navigate(`/rooms/${roomCode}`);
         }
 
-
-
     return( 
         <div id="page-auth">
             <aside>
