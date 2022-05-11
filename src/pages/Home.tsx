@@ -10,8 +10,9 @@ import { useAuth } from '../hooks/useAuth';
 import '../styles/auth.scss';
 import { FormEvent, useState } from 'react';
 import { database } from '../services/firebase';
-import toast from 'react-hot-toast';
+//import toast, { Toaster } from 'react-hot-toast';
 
+//<div><Toaster/></div>
 export function Home(){
     const navigate = useNavigate();
     const {user,signInWithGoogle} = useAuth();
@@ -33,8 +34,13 @@ export function Home(){
             }
             const roomRef = await database.ref(`rooms/${roomCode}`).get();
             if (!roomRef.exists()){
-                //alert('Rooms does not exists.');
-                toast.error('Rooms does not exists.');
+                alert('Rooms does not exists.');
+                //toast.error('Rooms does not exists.');
+                return;
+            }
+
+            if(roomRef.val().endedAt){
+                alert('Rooms already closed.');
                 return;
             }
             navigate(`/rooms/${roomCode}`);
